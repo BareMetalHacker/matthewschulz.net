@@ -251,7 +251,7 @@ urls = [f"{BASE}/", f"{BASE}/papers/"] + [f"{BASE}/papers/{p['slug']}/" for p in
 open(f"{SITE}/sitemap.xml", "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
     "".join(f"  <url><loc>{u}</loc><lastmod>{BUILD_DATE}</lastmod></url>\n" for u in urls) + "</urlset>\n")
 if len(sys.argv) > 4 and sys.argv[4] == "cname":
-    open(f"{SITE}/CNAME", "w").write("matthewschulz.net\n")
+    open(f"{SITE}/CNAME", "w").write("matthewschulz.net")   # same bytes as the file GitHub writes from Pages settings
 open(f"{SITE}/.nojekyll", "w").write("")
 open(f"{SITE}/404.html", "w").write(head("Page not found", "Page not found", f"{BASE}/404.html", root=BASE + "/") +
     f'<main><h1>Page not found</h1><p>The papers are listed on <a href="{BASE}/papers/">the papers page</a>.</p></main>\n' + FOOT)
