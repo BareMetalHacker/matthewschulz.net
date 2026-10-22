@@ -253,6 +253,10 @@ open(f"{SITE}/sitemap.xml", "w").write('<?xml version="1.0" encoding="UTF-8"?>\n
 if len(sys.argv) > 4 and sys.argv[4] == "cname":
     open(f"{SITE}/CNAME", "w").write("matthewschulz.net")   # same bytes as the file GitHub writes from Pages settings
 open(f"{SITE}/.nojekyll", "w").write("")
+# files that must sit at the site root exactly as given (e.g. Google Search Console verification)
+_static = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+for _f in sorted(os.listdir(_static)) if os.path.isdir(_static) else []:
+    shutil.copyfile(os.path.join(_static, _f), f"{SITE}/{_f}")
 open(f"{SITE}/404.html", "w").write(head("Page not found", "Page not found", f"{BASE}/404.html", root=BASE + "/") +
     f'<main><h1>Page not found</h1><p>The papers are listed on <a href="{BASE}/papers/">the papers page</a>.</p></main>\n' + FOOT)
 json.dump([dict(slug=p["slug"], n=p["n"], concept=p["concept"], title=p["title"], first=p["first"], bundle=p["bundle"]) for p in papers_sorted],
