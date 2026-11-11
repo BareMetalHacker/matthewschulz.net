@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question the Substrate: Why a Learning Mind Can&#x27;t Grade Its Own Homework — Matthew “Bear” Schulz</title>
+<meta name="description" content="What happens to a learning mind when the thing checking its work can&#x27;t be trusted? This preprint answers that question in a small loop with an exact checker. A small neural network learns to say how many times a closed loop winds around a point, then keeps learning on labels it gives itself, while a">
+<link rel="canonical" href="https://matthewschulz.net/papers/question-the-substrate/">
+<link rel="stylesheet" href="../../style.css">
+<meta name="citation_title" content="Question the Substrate: Why a Learning Mind Can&#x27;t Grade Its Own Homework">
+<meta name="citation_author" content="Schulz, Matthew">
+<meta name="citation_publication_date" content="2026/11/9">
+<meta name="citation_online_date" content="2026/11/9">
+<meta name="citation_doi" content="10.5281/zenodo.24094163">
+<meta name="citation_abstract_html_url" content="https://matthewschulz.net/papers/question-the-substrate/">
+<meta name="citation_language" content="en">
+<meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">
+<meta name="citation_keywords" content="self-training">
+<meta name="citation_keywords" content="pseudo-labeling">
+<meta name="citation_keywords" content="confirmation bias">
+<meta name="citation_keywords" content="model collapse">
+<meta name="citation_keywords" content="recursive training">
+<meta name="citation_keywords" content="self-verification">
+<meta name="citation_keywords" content="LLM-as-a-judge">
+<meta name="citation_keywords" content="verification">
+<meta name="citation_keywords" content="calibration">
+<meta name="citation_keywords" content="class imbalance">
+<meta name="citation_keywords" content="semi-supervised learning">
+<meta name="citation_keywords" content="cluster assumption">
+<meta name="citation_pdf_url" content="https://matthewschulz.net/papers/question-the-substrate/question-the-substrate.pdf">
+</head><body><div class="wrap">
+<header class="site"><a class="name" href="../../">Matthew “Bear” Schulz</a>
+<nav><a href="../../papers/">Papers</a><a href="https://orcid.org/0009-0000-0956-5743">ORCID</a></nav></header>
+<main>
+<h1>Question the Substrate: Why a Learning Mind Can&#x27;t Grade Its Own Homework</h1>
+<p class="byline">Matthew “Bear” Schulz · <a href="https://orcid.org/0009-0000-0956-5743">ORCID 0009-0000-0956-5743</a></p>
+<p class="meta">First published 9 November 2026</p>
+<p class="meta">DOI <a href="https://doi.org/10.5281/zenodo.24094163">10.5281/zenodo.24094163</a> · licence <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+<p><span class="status">Preprint · not peer reviewed</span></p>
+<div class="actions"><a class="primary" href="question-the-substrate.pdf">Read the paper (PDF, 7.76 MB)</a><a href="https://doi.org/10.5281/zenodo.24094163">Record on Zenodo</a></div>
+
+<h2>Abstract</h2>
+<div class="abstract"><p>What happens to a learning mind when the thing checking its work can't be trusted? This preprint answers that question in a small loop with an exact checker. A small neural network learns to say how many times a closed loop winds around a point, then keeps learning on labels it gives itself, while a checker decides which labels to keep. Every comparison changes only the checker. Every number comes from five or more random starts and is printed by a tool that ships with the paper, and 212 predictions were written down before their runs: 122 held, 89 missed and 1 partly held.</p>
+<p>The mind's own certainty is a rich-get-richer filter. A chain of fresh networks, each raised only on the half of its parent's labels the parent was surest of, fell from 82.0% to 56.7% accuracy in six generations, while keeping a random half lost only 4.1 points. Confidence favors what the mind already favors, which in most worlds means its biggest answers.</p>
+<p>Freeze the judge, and the same cut is safe. Ranked by the first network, frozen after its one lesson, instead of by each generation itself, the same cut lost 2.1 points instead of 25.3 and kept alive a rare answer that the self-ranked chain erased. This frozen ranker is the "self-verification" of Fu et al. (2025); their theorem and this collapse agree. The danger is the self-reference, not the cut.</p>
+<p>A small answer dies at a cliff, and the average hides it. Below about 12% of the world, a small answer died out under the mind's own certainty while overall accuracy barely moved. The cliff is a tipping zone, and more data moves it only slowly. The field's standard fix works once it is aimed at answer sizes counted from the labeled examples, and it is only as good as that count.</p>
+<p>Shared schooling means shared blind spots. A judge trained on the student's own lessons let through 63.5% of the student's wrong answers; a judge just as accurate, trained on different lessons, let through 34.0%; nine outsiders, each with its own lessons, let through 0.9%. A strong outsider can hear the errors a mind cannot hear in itself, and its ear also works as a gate.</p>
+<p>A checker that can't say no damages confidence first, and accuracy only on new ground, more the farther from home. Humility, a network's "unknown," survives only with an outside checker and the courage to keep answering. A crude real check beats a polished twin.</p>
+<p>Across every test, each failure ranks or copies by the chain itself, and each cure is a fixed reference from outside it. Act 6 turns the results into eighteen engineering knobs. The paper is the learning-machine form of the question asked in The Anchor and the Hammer: how can any mind know whether it has anchored its picture of reality to the truth?</p>
+<p>Preprint, not peer reviewed, with a limited search of the literature. Built with Claude (Anthropic) assistance for algorithm and program development. Code and data are in Question_the_Substrate_crate.zip, where one command reruns every number and figure. Contact: <a>mattschulz97@protonmail.com</a>. License: CC BY 4.0.</p></div>
+<h2>How to cite</h2>
+<p class="cite">Schulz, M. (2026). Question the Substrate: Why a Learning Mind Can&#x27;t Grade Its Own Homework. Preprint, Zenodo. https://doi.org/10.5281/zenodo.24094163</p>
+<h2>Related papers</h2><ul class="list"><li><a href="../trust-in-the-dark/">Trust in the Dark: Maintaining Map Fidelity Under Corruption, Cost, and Substrate Decay</a><span class="d">5 June 2026</span></li><li><a href="../walking-the-loop/">Walking the Loop A Quick Guide to Holonomy — the plain-language primer</a><span class="d">20 July 2026</span></li><li><a href="../anchor-and-the-hammer/">The Anchor and the Hammer: Why No Observer Reads Itself True, and the Only Known Way Across the Wall</a><span class="d">20 July 2026</span></li><li><a href="../loop-walking-field-guide/">Loop Walking: A Field Guide to Hacking the Universe with Holonomy</a><span class="d">5 August 2026</span></li><li><a href="../two-arrows/">Two Arrows: Why a Learning Mind Heals Its Answers Long Before Its Self</a><span class="d">10 November 2026</span></li></ul>
+</main>
+<footer>Preprints from an independent, part-time research team, free to the world under CC BY 4.0.
+None of this work has been peer reviewed, and each paper's literature search is limited; each paper says so and lists its own limits.
+Corrections are shown on the page of the paper they correct.</footer>
+</div></body></html>

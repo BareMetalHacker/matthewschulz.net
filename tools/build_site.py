@@ -86,7 +86,9 @@ SLUG_BY_CONCEPT = {"20502057": "comparative-biosonar", "20587337": "topological-
     "21331651": "reading-the-sky-through-loops", "21351574": "linking-number-heredity", "21367632": "bifrost-memory-bridge",
     "21448986": "walking-the-loop", "21815319": "nucleic-acid-backbones", "21845002": "twelve-answers-problem",
     "21857701": "memory-by-subtraction", "21449569": "integer-forest-loop-walk", "22105828": "two-checks-moving-environment",
-    "22652934": "auditory-pathway-data-channel", "21811588": "loop-walking-field-guide", "22908909": "jellyfish-holonomist-of-the-sea"}
+    "22652934": "auditory-pathway-data-channel", "21811588": "loop-walking-field-guide", "22908909": "jellyfish-holonomist-of-the-sea",
+    "24100980": "loop-atlas-record", "24126137": "loop-walking-field-guide-readers-edition",
+    "24128369": "holonomic-sheep-unabridged", "24128765": "holonomic-sheep-selected-works-volume-1"}
 SLUG_OVERRIDE = {_n_of[c]: s for c, s in SLUG_BY_CONCEPT.items()}
 slugs = {}
 for p in papers:
@@ -156,7 +158,9 @@ def related_links(p):
         elif c == erratum["concept"]:
             continue
         else:
-            out.append(f'<li><a href="https://doi.org/{c}">doi.org/{c}</a><span class="d">another record by the author on Zenodo</span></li>')
+            # only the author's own records (every version DOI fetch_zenodo found maps to one) carry the author label
+            label = "another record by the author on Zenodo" if c in set(v2c.values()) else "a record by other authors on Zenodo"
+            out.append(f'<li><a href="https://doi.org/{c}">doi.org/{c}</a><span class="d">{label}</span></li>')
     return out
 
 os.makedirs(SITE, exist_ok=True)

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Mirror in Feigenbaum&#x27;s Table: the published δ for maps of odd order, the maps&#x27; own values, and one sign that may explain the difference — Matthew “Bear” Schulz</title>
+<meta name="description" content="The standard table of Feigenbaum&#x27;s constants for the maps f(x) = 1 − μ|x|^d (Briggs 1991 and his 1997 thesis, Table 2.3; its rows for orders 3 to 6 repeated in MathWorld&#x27;s Feigenbaum Constant page, its order-3 value in Finch&#x27;s Mathematical Constants, 2003) gives δ at every odd order differently from">
+<link rel="canonical" href="https://matthewschulz.net/papers/mirror-in-feigenbaums-table/">
+<link rel="stylesheet" href="../../style.css">
+<meta name="citation_title" content="A Mirror in Feigenbaum&#x27;s Table: the published δ for maps of odd order, the maps&#x27; own values, and one sign that may explain the difference">
+<meta name="citation_author" content="Schulz, Matthew">
+<meta name="citation_publication_date" content="2026/11/9">
+<meta name="citation_online_date" content="2026/11/9">
+<meta name="citation_doi" content="10.5281/zenodo.24101154">
+<meta name="citation_abstract_html_url" content="https://matthewschulz.net/papers/mirror-in-feigenbaums-table/">
+<meta name="citation_language" content="en">
+<meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">
+<meta name="citation_keywords" content="Feigenbaum constants">
+<meta name="citation_keywords" content="period doubling">
+<meta name="citation_keywords" content="universality">
+<meta name="citation_keywords" content="unimodal maps">
+<meta name="citation_keywords" content="maximum of order z">
+<meta name="citation_keywords" content="renormalization">
+<meta name="citation_keywords" content="erratum">
+<meta name="citation_keywords" content="numerical reproduction">
+<meta name="citation_pdf_url" content="https://matthewschulz.net/papers/mirror-in-feigenbaums-table/mirror-in-feigenbaums-table.pdf">
+</head><body><div class="wrap">
+<header class="site"><a class="name" href="../../">Matthew “Bear” Schulz</a>
+<nav><a href="../../papers/">Papers</a><a href="https://orcid.org/0009-0000-0956-5743">ORCID</a></nav></header>
+<main>
+<h1>A Mirror in Feigenbaum&#x27;s Table: the published δ for maps of odd order, the maps&#x27; own values, and one sign that may explain the difference</h1>
+<p class="byline">Matthew “Bear” Schulz · <a href="https://orcid.org/0009-0000-0956-5743">ORCID 0009-0000-0956-5743</a></p>
+<p class="meta">First published 9 November 2026</p>
+<p class="meta">DOI <a href="https://doi.org/10.5281/zenodo.24101154">10.5281/zenodo.24101154</a> · licence <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+<p><span class="status">Preprint · not peer reviewed</span></p>
+<div class="actions"><a class="primary" href="mirror-in-feigenbaums-table.pdf">Read the paper (PDF, 0.08 MB)</a><a href="https://doi.org/10.5281/zenodo.24101154">Record on Zenodo</a></div>
+
+<h2>Abstract</h2>
+<div class="abstract"><p>The standard table of Feigenbaum's constants for the maps f(x) = 1 − μ|x|^d (Briggs 1991 and his 1997 thesis, Table 2.3; its rows for orders 3 to 6 repeated in MathWorld's Feigenbaum Constant page, its order-3 value in Finch's Mathematical Constants, 2003) gives δ at every odd order differently from what the maps themselves do, while its α agrees with Feigenbaum's equation at every order from 2 to 12 and its δ at every even order.</p>
+<p>Published and corrected δ at the odd orders (published as Briggs prints them, rounded to 10 places; corrected from the maps): order 3: published 5.9679687038, corrected 6.0846890743; order 5: published 8.3494991321, corrected 8.3443847487; order 7: published 10.2221595288, corrected 10.1597798679; order 9: published 11.7683336396, corrected 11.6731058504; order 11: published 13.0765458057, corrected 12.9602125044.</p>
+<p>McCartney (2020) found the values at orders 3 to 9 first, from the maps' superstable orbits to period 2^32, and concluded that the discrepancy more likely lay in the earlier work, without naming a cause; Vieru (2008) and a Wolfram Demonstration (Moon 2013) had noticed the odd orders before. This note repeats McCartney's reading with its own code, reads the maps by a second route (Feigenbaum's own functional equation, which gives δ at order 3 as 6.0846890742621218960461210662593), and adds the corrected value at order 11. A separate program, written from scratch by a fresh run of the same AI model given no number, agrees at every order it was run on: 2 to 5, 11 and 12. The difference turned up in The Loop Atlas, a book of small loop toys by the same team (10.5281/zenodo.24100672).</p>
+<p>How we think the difference arose: to get δ, the calculation evaluates a small change of the fixed function at the point x/α, which for x &gt; 0 lies on the hump's left side because α is negative. Written with the size of x there, as the maps require, it gives the maps' δ. Written with signed powers, it gives every published odd-order value (to 2 × 10^−29 at order 3) and leaves α and the even orders untouched, since an even power of a negative number is positive anyway. We have not seen the program that made the table, so this is a reconstruction that reproduces its numbers, not a reading of its code; we ask for more eyes to confirm or correct it.</p>
+<p>The files: the note (FEIGENBAUM_ODD_ORDERS_NOTE_2026-10-31.pdf, with its source as md) and its tool folder in one zip (FEIGENBAUM_ODD_ORDERS_TOOL_2026-11-10.zip): the tool that prints every number the note computes, FEIGENBAUM_ODD_ORDERS.py, with its one-click launcher, its two runs (one on the workspace, one on a Windows laptop, digit for digit the same), a README, and the separate program's code and outputs, its runs at orders 11 and 12 among them.</p>
+<p>Preprint without peer review; the literature search is limited to free records, and sources read only in part, or not at all, are marked so in the note. Every number the note computes is printed by a tool that ships with it. Built with Claude (Anthropic), which developed and ran the tool, kept the records and drafted the text; responsibility rests with the named human author.</p>
+<p>Contact: Matthew "Bear" Schulz, Independent Researcher, Belmont, CA · ORCID 0009-0000-0956-5743 · mattschulz97@protonmail.com</p></div>
+<h2>How to cite</h2>
+<p class="cite">Schulz, M. (2026). A Mirror in Feigenbaum&#x27;s Table: the published δ for maps of odd order, the maps&#x27; own values, and one sign that may explain the difference. Preprint, Zenodo. https://doi.org/10.5281/zenodo.24101154</p>
+<h2>Related papers</h2><ul class="list"><li><a href="../loop-atlas/">The Loop Atlas: A loop comes home to where it started. What did it leave behind?</a><span class="d">9 November 2026</span></li><li><a href="https://doi.org/10.5281/zenodo.20302943">doi.org/10.5281/zenodo.20302943</a><span class="d">a record by other authors on Zenodo</span></li></ul>
+</main>
+<footer>Preprints from an independent, part-time research team, free to the world under CC BY 4.0.
+None of this work has been peer reviewed, and each paper's literature search is limited; each paper says so and lists its own limits.
+Corrections are shown on the page of the paper they correct.</footer>
+</div></body></html>

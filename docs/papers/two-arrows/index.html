@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Arrows: Why a Learning Mind Heals Its Answers Long Before Its Self — Matthew “Bear” Schulz</title>
+<meta name="description" content="Description A mind has two arrows. The outer arrow is what it sees and does: its answers. The inner arrow is who it is: the inside that produces them. We sent a small learning network (4 inputs, 16 tanh hidden units, 1 output) round closed loops of tasks, brought it back exactly to where it started,">
+<link rel="canonical" href="https://matthewschulz.net/papers/two-arrows/">
+<link rel="stylesheet" href="../../style.css">
+<meta name="citation_title" content="Two Arrows: Why a Learning Mind Heals Its Answers Long Before Its Self">
+<meta name="citation_author" content="Schulz, Matthew">
+<meta name="citation_publication_date" content="2026/11/10">
+<meta name="citation_online_date" content="2026/11/10">
+<meta name="citation_doi" content="10.5281/zenodo.24120415">
+<meta name="citation_abstract_html_url" content="https://matthewschulz.net/papers/two-arrows/">
+<meta name="citation_language" content="en">
+<meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">
+<meta name="citation_keywords" content="identity drift">
+<meta name="citation_keywords" content="holonomy">
+<meta name="citation_keywords" content="continual learning">
+<meta name="citation_keywords" content="stability-plasticity trade-off">
+<meta name="citation_keywords" content="representational drift">
+<meta name="citation_keywords" content="geometric phase">
+<meta name="citation_keywords" content="neural network training dynamics">
+<meta name="citation_keywords" content="curriculum order">
+<meta name="citation_keywords" content="reproducible research">
+<meta name="citation_pdf_url" content="https://matthewschulz.net/papers/two-arrows/two-arrows.pdf">
+</head><body><div class="wrap">
+<header class="site"><a class="name" href="../../">Matthew “Bear” Schulz</a>
+<nav><a href="../../papers/">Papers</a><a href="https://orcid.org/0009-0000-0956-5743">ORCID</a></nav></header>
+<main>
+<h1>Two Arrows: Why a Learning Mind Heals Its Answers Long Before Its Self</h1>
+<p class="byline">Matthew “Bear” Schulz · <a href="https://orcid.org/0009-0000-0956-5743">ORCID 0009-0000-0956-5743</a></p>
+<p class="meta">First published 10 November 2026</p>
+<p class="meta">DOI <a href="https://doi.org/10.5281/zenodo.24120415">10.5281/zenodo.24120415</a> · licence <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+<p><span class="status">Preprint · not peer reviewed</span></p>
+<div class="actions"><a class="primary" href="two-arrows.pdf">Read the paper (PDF, 5.10 MB)</a><a href="https://doi.org/10.5281/zenodo.24120415">Record on Zenodo</a></div>
+
+<h2>Abstract</h2>
+<div class="abstract"><p><strong>Description</strong></p>
+<p>A mind has two arrows. The outer arrow is what it sees and does: its answers. The inner arrow is who it is: the inside that produces them. We sent a small learning network (4 inputs, 16 tanh hidden units, 1 output) round closed loops of tasks, brought it back exactly to where it started, and measured both arrows on the way home. The second paper of a series, after Question the Substrate: Why a Learning Mind Can't Grade Its Own Homework.</p>
+<p>What this paper found:</p>
+<ol>
+<li>The answers come home; the inside does not, for a long time. After 30,000 practice steps the answers keep 0.0167 of the change they had on return, while the hidden layer keeps 0.3049 of its mark, 18.49 times better kept on average over five starts. We call what stays behind identity drift.</li>
+<li>A learner that only follows its own gradient picks up an area law. The part of the leftover that flips with the loop's direction grows in proportion to the enclosed area (log-log slopes 0.9545 to 1.0092, five of five starts): the closed-loop form of the known order effect between two lessons, measured inside a learner. Most of the mark ignores direction, and straight out and straight back leaves the biggest mark of all.</li>
+<li>Identity drift comes in two kinds. On a task that does not care which way its direction points, half a turn returns the network with a pair of hidden units exchanged, in one event just past a quarter turn, and no practice moves it back.</li>
+<li>What stays can be forecast the moment the loop ends. A first-order relaxation forecast, with no practice run, lands within 25 percent in 37 of 45 cases, median ratio 1.003.</li>
+<li>Only a kept record of the self brings it home: 0.0003 of the inner mark against 0.3049 for practice alone. It works best switched on after the trip, not during it. Copies of the drifted self, a twin's answers and a stranger's answers do not bring it home.</li>
+<li>One line from the first generation's map holds a lineage of learners level for twelve generations; the same line measured from the parent leaks.</li>
+<li>Graded against the truth, identity drift hides; graded against a kept copy of home, it is loud off home ground, 8.888 to 9.876 times its home gap on inputs three times wider, in a run registered and carried out independently in the first paper's session. Errors need an outside ear; identity needs a kept record.</li>
+</ol>
+<p>Before their runs, 164 predictions were written down; 81 held, and every miss was given a redesign check (Appendices A and B). Every number in the paper is printed by a tool that ships with it, and a full rerun in a fresh copy reproduces every data file and figure byte for byte.</p>
+<p>Files: the paper as PDF and Markdown, and one code crate. The crate reruns every number and figure with one command, and holds Try the Toy: four small games with the paper's own network, written in plain words for readers in any language, that a person or a small AI can play, predict and score. Every game can print JSON, an AI driver can choose its settings by writing a small JSON plan, and a check reproduces the paper's healing and keeper numbers exactly.</p>
+<p>This is a preprint and has not been peer reviewed. Its search of the literature is limited: each cited work was checked against its publisher's record, and most were not read in full. Built with Claude (Anthropic) assistance for algorithm and program development. Contact: <a>mattschulz97@protonmail.com</a>. CC BY 4.0.</p>
+<p>Related works by the author: Question the Substrate: Why a Learning Mind Can't Grade Its Own Homework (concept DOI 10.5281/zenodo.24094163); The Anchor and the Hammer (concept DOI 10.5281/zenodo.21450883); The Loop Atlas (concept DOI 10.5281/zenodo.24100672).</p></div>
+<h2>How to cite</h2>
+<p class="cite">Schulz, M. (2026). Two Arrows: Why a Learning Mind Heals Its Answers Long Before Its Self. Preprint, Zenodo. https://doi.org/10.5281/zenodo.24120415</p>
+<h2>Related papers</h2><ul class="list"><li><a href="../anchor-and-the-hammer/">The Anchor and the Hammer: Why No Observer Reads Itself True, and the Only Known Way Across the Wall</a><span class="d">20 July 2026</span></li><li><a href="../question-the-substrate/">Question the Substrate: Why a Learning Mind Can&#x27;t Grade Its Own Homework</a><span class="d">9 November 2026</span></li><li><a href="../loop-atlas/">The Loop Atlas: A loop comes home to where it started. What did it leave behind?</a><span class="d">9 November 2026</span></li></ul>
+</main>
+<footer>Preprints from an independent, part-time research team, free to the world under CC BY 4.0.
+None of this work has been peer reviewed, and each paper's literature search is limited; each paper says so and lists its own limits.
+Corrections are shown on the page of the paper they correct.</footer>
+</div></body></html>

@@ -32,10 +32,14 @@ for pg in sorted(pages):
         if h.startswith("http"):
             ext.add(h)
             m=re.search(r"doi\.org/(10\.5281/zenodo\.\d+)",h)
-            if m and m.group(1) not in concepts: problems.append(f"non-concept DOI {m.group(1)} in {pg}")
+            if m and m.group(1) in v2c and m.group(1) not in concepts: problems.append(f"version DOI link {m.group(1)} in {pg}")
         elif h.startswith("mailto:"): problems.append(f"mailto in {pg}")
         else:
             if not os.path.exists(resolve(pg,h)): problems.append(f"broken link {h} in {pg}")
+    raw=open(pg,encoding="utf-8").read()
+    for d,label in re.findall(r'doi\.org/(10\.5281/zenodo\.\d+)">[^<]*</a><span class="d">([^<]*)</span>',raw):
+        if "by the author" in label and d not in concepts: problems.append(f"{d} labelled as the author's own but is not one of the author's records, in {pg}")
+        if "by other authors" in label and d in concepts: problems.append(f"{d} labelled as other authors' but is the author's own record, in {pg}")
     txt=" ".join(p.text)
     for m in re.finditer(r"zenodo\.(\d{6,})",txt):
         d=f"10.5281/zenodo.{m.group(1)}"
