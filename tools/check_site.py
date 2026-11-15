@@ -7,14 +7,21 @@ BASE = "https://matthewschulz.net"
 v2c = json.load(open(f"{DATA}/version_to_concept.json"))
 concepts = set(v2c.values())
 class P(HTMLParser):
-    def __init__(s): super().__init__(); s.links=[]; s.meta={}; s.scripts=0; s.text=[]
+    # executable scripts are not allowed; schema.org data blocks (type application/ld+json) are, and are checked below
+    def __init__(s): super().__init__(); s.links=[]; s.meta={}; s.scripts=0; s.text=[]; s.ld=[]; s.in_ld=False
     def handle_starttag(s,t,a):
         a=dict(a)
         if t=="a" and "href" in a: s.links.append(a["href"])
         if t=="link" and "href" in a: s.links.append(a["href"])
         if t=="meta" and "name" in a: s.meta.setdefault(a["name"],[]).append(a.get("content",""))
-        if t=="script": s.scripts+=1
-    def handle_data(s,d): s.text.append(d)
+        if t=="script":
+            if a.get("type")=="application/ld+json": s.in_ld=True; s.ld.append("")
+            else: s.scripts+=1
+    def handle_endtag(s,t):
+        if t=="script": s.in_ld=False
+    def handle_data(s,d):
+        if s.in_ld: s.ld[-1]+=d
+        else: s.text.append(d)
 problems=[]; ext=set(); pages=glob.glob(f"{SITE}/**/*.html",recursive=True)
 def resolve(page, href):
     href=href.split("#")[0]
@@ -23,7 +30,7 @@ def resolve(page, href):
     if path.endswith("/"): path+="index.html"
     return os.path.normpath(path)
 marker=re.compile(r"(TODO|TBD|FIXME|\bDRAFT\b|REVIEW COPY|SCAFFOLD|\[stated\]|handover|working note|\bcrate\b|gmail|let me|I will now|as requested)",re.I)
-ntag=0; links_total=0; marker_hits=[]
+ntag=0; links_total=0; marker_hits=[]; nld=0; nkw=0
 for pg in sorted(pages):
     p=P(); p.feed(open(pg,encoding="utf-8").read())
     if p.scripts: problems.append(f"script tag in {pg}")
@@ -50,6 +57,15 @@ for pg in sorted(pages):
         ntag+=1
         for req in ["citation_title","citation_author","citation_publication_date"]:
             if req not in p.meta: problems.append(f"missing {req} in {pg}")
+        if len(p.ld)!=1: problems.append(f"expected one schema.org block, found {len(p.ld)} in {pg}")
+        else:
+            try:
+                j=json.loads(p.ld[0]); nld+=1
+                if j.get("@type")!="ScholarlyArticle": problems.append(f"schema.org type {j.get('@type')} in {pg}")
+                if j.get("keywords",[])!=p.meta.get("citation_keywords",[]): problems.append(f"schema.org keywords differ from Scholar keywords in {pg}")
+                nkw+=len(j.get("keywords",[]))
+                if j.get("keywords") and not all(k in " ".join(p.text) for k in j["keywords"]): problems.append(f"a keyword is not visible as page text in {pg}")
+            except Exception as e: problems.append(f"schema.org block does not parse in {pg}: {e}")
         if not re.fullmatch(r"\d{4}/\d{1,2}/\d{1,2}",p.meta.get("citation_publication_date",[""])[0]): problems.append(f"bad date {pg}")
         pdfu=p.meta.get("citation_pdf_url")
         if pdfu:
@@ -72,6 +88,7 @@ paper_pages={os.path.normpath(x) for x in pages if "/papers/" in x and not x.end
 home_to_list=os.path.normpath(f"{SITE}/papers/index.html") in {resolve(f"{SITE}/index.html",h) for h in home.links if not h.startswith("http")}
 listed={resolve(f"{SITE}/papers/index.html",h) for h in lst.links if not h.startswith("http")}
 print("html pages",len(pages),"| paper pages",ntag,"| links checked",links_total,"| external links",len(ext))
+print("schema.org blocks parsed:",nld,"| keywords carried (visible, Scholar tags and schema.org agree):",nkw)
 print("pdfs matching Zenodo md5 and size:",md5_ok,"of",len(man),"| over 5 MB:",big)
 print("home links to papers page:", home_to_list, "| paper pages linked from papers page:",len(paper_pages & listed),"of",len(paper_pages),"| unlisted:",sorted(paper_pages-listed))
 rob=open(f"{SITE}/robots.txt").read(); print("robots.txt:",repr(rob))

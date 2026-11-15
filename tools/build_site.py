@@ -121,6 +121,8 @@ h2{font-size:1.15rem;margin:1.8rem 0 .5rem}
 .abstract p{margin:.6rem 0}
 ul.list{list-style:none;padding:0;margin:0}ul.list li{padding:.7rem 0;border-bottom:1px solid var(--line)}
 ul.list .d{display:block;color:var(--soft);font-size:.85rem;font-family:system-ui,sans-serif}
+ul.list .s{display:block;font-size:.95rem;margin:.2rem 0 .1rem}
+.keywords{color:var(--soft);font-size:.95rem}
 .cite{font-size:.9rem;color:var(--soft);word-break:break-word}
 footer{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:.8rem;color:var(--soft);font-size:.85rem}
 """
@@ -143,6 +145,50 @@ None of this work has been peer reviewed, and each paper's literature search is 
 Corrections are shown on the page of the paper they correct.</footer>
 </div></body></html>
 """
+
+def keywords_html(p):
+    """Every keyword from the Zenodo record, as text a reader (and a search engine) can see."""
+    if not p["keywords"]: return ""
+    return '<h2>Keywords</h2>\n<p class="keywords">' + " · ".join(html.escape(k) for k in p["keywords"]) + "</p>"
+
+# The papers-list line for a record whose Zenodo description has no descriptive sentence (only a version note
+# and keywords); taken from the description's own words. Replace once that description is rewritten on Zenodo.
+LEAD_BY_CONCEPT = {"10.5281/zenodo.21798310": "Companion to Taking a Loop Walk Through the Integer Forest."}
+
+def lead(text, title, limit=240):
+    """One line for the papers list: the abstract's opening sentence, skipping a leading label ("Abstract",
+    "Description"), a sentence that only restates the title, an author line, a version note or a preprint-status notice; cut at a word if long."""
+    t = re.sub(r"\S+@\S+\s*", "", text)   # an author-block email address is never a description
+    t = re.sub(r"^\s*(abstract|description(\s*/\s*abstract)?|what it is)\s*[.:—–-]?\s+", "", t, flags=re.I)
+    for _ in range(8):
+        m = re.match(r"(.+?(?<!\s[A-Z])[.!?])\s+", t + " ")
+        if not m or m.end() >= len(t): break
+        first = m.group(1)
+        if re.search(r"not peer|^preprint|perspective preprint|^matthew|schulz|orcid|independent researcher|^v\d+(\.\d+)*\b", first, re.I) or first.lower().startswith(title.lower()[:25]):
+            t = t[m.end():]
+        else:
+            break
+    m = re.search(r"^(.{40,}?(?<!\s[A-Z])[.!?])\s", t + " ")
+    s = m.group(1) if m else t
+    if len(s) > limit:
+        s = s[:limit].rsplit(" ", 1)[0].rstrip(",;:—–- ") + "…"
+    return s
+
+def jsonld(p, url, pdf_url):
+    """schema.org ScholarlyArticle block: the same facts as the Scholar tags, in the form general search engines read."""
+    d = {"@context": "https://schema.org", "@type": "ScholarlyArticle",
+         "name": p["title"], "headline": p["title"], "url": url, "sameAs": f"https://doi.org/{p['concept']}",
+         "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": p["concept"]},
+         "author": {"@type": "Person", "name": "Matthew Schulz", "alternateName": "Bear",
+                    "identifier": f"https://orcid.org/{ORCID}", "sameAs": f"https://orcid.org/{ORCID}"},
+         "datePublished": p["first"], "dateModified": p["latest"], "inLanguage": "en",
+         "license": "https://creativecommons.org/licenses/by/4.0/", "isAccessibleForFree": True,
+         "publisher": {"@type": "Organization", "name": "Zenodo"},
+         "keywords": p["keywords"], "abstract": p["abstract_plain"]}
+    if pdf_url:
+        d["encoding"] = {"@type": "MediaObject", "contentUrl": pdf_url, "encodingFormat": "application/pdf"}
+    body = json.dumps(d, ensure_ascii=False, indent=1).replace("</", "<\\/")
+    return f'<script type="application/ld+json">\n{body}\n</script>'
 
 def related_links(p):
     seen, out = set(), []
@@ -178,7 +224,7 @@ for p in papers:
             f'<meta name="citation_abstract_html_url" content="{url}">',
             '<meta name="citation_language" content="en">',
             '<meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">']
-    for k in p["keywords"][:12]:
+    for k in p["keywords"]:   # every keyword from the Zenodo record, no cap
         tags.append(f'<meta name="citation_keywords" content="{html.escape(k)}">')
     pdf_html = ""
     if not p["bundle"]:
@@ -186,12 +232,15 @@ for p in papers:
         src = f"{DATA}/pdfs/{rid}.pdf"
         shutil.copyfile(src, f"{d}/{pdf_name}")
         tags.append(f'<meta name="citation_pdf_url" content="{url}{pdf_name}">')
+        pdf_url = f"{url}{pdf_name}"
         pdf_html = f'<a class="primary" href="{pdf_name}">Read the paper (PDF, {mb(size)})</a>'
         zchk = next(x["checksum"] for x in p["files"] if x["key"] == key)
         manifest.append((p["slug"], pdf_name, size, zchk))
     else:
         npdf = sum(1 for x in p["files"] if x["key"].lower().endswith(".pdf"))
         pdf_html = ""
+        pdf_url = None
+    tags.append(jsonld(p, url, pdf_url))
     box = ""
     if p["n"] == ERRATUM_TARGET_N:
         ekey = next(x for x in erratum["files"] if x["key"].lower().endswith(".pdf"))
@@ -221,6 +270,7 @@ for p in papers:
 {box}
 <h2>Abstract</h2>
 <div class="abstract">{p['abstract']}</div>
+{keywords_html(p)}
 <h2>How to cite</h2>
 <p class="cite">Schulz, M. ({year}). {html.escape(p['title'])}. Preprint, Zenodo. https://doi.org/{p['concept']}</p>
 {rel_html}
@@ -231,6 +281,7 @@ for p in papers:
 # ---------- papers list (newest first by first-published date) ----------
 papers_sorted = sorted(papers, key=lambda p: (p["first"], p["n"]), reverse=True)
 items = "".join(f'<li><a href="{p["slug"]}/">{html.escape(p["title"])}</a>'
+                f'<span class="s">{html.escape(LEAD_BY_CONCEPT.get(p["concept"]) or lead(p["abstract_plain"], p["title"]))}</span>'
                 f'<span class="d">{nice_date(p["first"])} · doi.org/{p["concept"]}</span></li>' for p in papers_sorted)
 os.makedirs(f"{SITE}/papers", exist_ok=True)
 open(f"{SITE}/papers/index.html", "w").write(head(f"Papers — {AUTHOR_DISPLAY}", f"All preprints by {AUTHOR_DISPLAY}, newest first.", f"{BASE}/papers/", root="../") +

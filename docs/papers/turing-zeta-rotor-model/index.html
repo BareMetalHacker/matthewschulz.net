@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Turing Zeta Rotor Model: Building Turing&#x27;s 1939 zeta-function machine from his notes, and listening to it with a dial machine — Matthew “Bear” Schulz</title>
+<meta name="description" content="In 1939 Alan Turing set out to build a machine of gears, weights and cords that would find the zeros of the Riemann zeta function, on the idea of Lord Kelvin&#x27;s tide-predicting machine. The war came and it was never finished. This paper builds it as a toy in software from the published accounts of hi">
+<link rel="canonical" href="https://matthewschulz.net/papers/turing-zeta-rotor-model/">
+<link rel="stylesheet" href="../../style.css">
+<meta name="citation_title" content="The Turing Zeta Rotor Model: Building Turing&#x27;s 1939 zeta-function machine from his notes, and listening to it with a dial machine">
+<meta name="citation_author" content="Schulz, Matthew">
+<meta name="citation_publication_date" content="2026/11/14">
+<meta name="citation_online_date" content="2026/11/14">
+<meta name="citation_doi" content="10.5281/zenodo.24233198">
+<meta name="citation_abstract_html_url" content="https://matthewschulz.net/papers/turing-zeta-rotor-model/">
+<meta name="citation_language" content="en">
+<meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">
+<meta name="citation_keywords" content="Alan Turing">
+<meta name="citation_keywords" content="Riemann zeta function">
+<meta name="citation_keywords" content="zeta-function machine">
+<meta name="citation_keywords" content="Riemann-Siegel formula">
+<meta name="citation_keywords" content="Hardy Z function">
+<meta name="citation_keywords" content="tide-predicting machine">
+<meta name="citation_keywords" content="Lord Kelvin">
+<meta name="citation_keywords" content="history of computing">
+<meta name="citation_keywords" content="gear trains">
+<meta name="citation_keywords" content="continued fractions">
+<meta name="citation_keywords" content="Ford circles">
+<meta name="citation_keywords" content="Stern-Brocot tree">
+<meta name="citation_keywords" content="Lehmer pairs">
+<meta name="citation_keywords" content="preregistered predictions">
+<meta name="citation_keywords" content="reproducible research">
+<meta name="citation_keywords" content="toy model">
+<meta name="citation_pdf_url" content="https://matthewschulz.net/papers/turing-zeta-rotor-model/turing-zeta-rotor-model.pdf">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ScholarlyArticle",
+ "name": "The Turing Zeta Rotor Model: Building Turing's 1939 zeta-function machine from his notes, and listening to it with a dial machine",
+ "headline": "The Turing Zeta Rotor Model: Building Turing's 1939 zeta-function machine from his notes, and listening to it with a dial machine",
+ "url": "https://matthewschulz.net/papers/turing-zeta-rotor-model/",
+ "sameAs": "https://doi.org/10.5281/zenodo.24233198",
+ "identifier": {
+  "@type": "PropertyValue",
+  "propertyID": "DOI",
+  "value": "10.5281/zenodo.24233198"
+ },
+ "author": {
+  "@type": "Person",
+  "name": "Matthew Schulz",
+  "alternateName": "Bear",
+  "identifier": "https://orcid.org/0009-0000-0956-5743",
+  "sameAs": "https://orcid.org/0009-0000-0956-5743"
+ },
+ "datePublished": "2026-11-14",
+ "dateModified": "2026-11-14",
+ "inLanguage": "en",
+ "license": "https://creativecommons.org/licenses/by/4.0/",
+ "isAccessibleForFree": true,
+ "publisher": {
+  "@type": "Organization",
+  "name": "Zenodo"
+ },
+ "keywords": [
+  "Alan Turing",
+  "Riemann zeta function",
+  "zeta-function machine",
+  "Riemann-Siegel formula",
+  "Hardy Z function",
+  "tide-predicting machine",
+  "Lord Kelvin",
+  "history of computing",
+  "gear trains",
+  "continued fractions",
+  "Ford circles",
+  "Stern-Brocot tree",
+  "Lehmer pairs",
+  "preregistered predictions",
+  "reproducible research",
+  "toy model"
+ ],
+ "abstract": "In 1939 Alan Turing set out to build a machine of gears, weights and cords that would find the zeros of the Riemann zeta function, on the idea of Lord Kelvin's tide-predicting machine. The war came and it was never finished. This paper builds it as a toy in software from the published accounts of his plan, turns it, and then improves it as a tinkerer might have, keeping the restoration and the overhaul apart. What it found: 1. Turing's own gearbox works on his range. Read from the blueprint's gear table, as transcribed by the Museum of Mathematics and Wolfram, and turned over the heights Turing proposed, his gears find 5,596 of the 5,598 zeros below height 6,000, losing only one pair whose zeros sit a ninth of the average spacing apart; re-set at each doorway, they find every one and move the zeros between three and ten times less than our best overhaul, the string machine. The pair they lose is the one pair, of all 5,597, that the rule we found for the bare wheels picks out. Four of his gears, wheel for wheel, are ones our machines had already chosen by rule before we read his table. 2. The machine works. Its turning wheels and one small correction find every one of the first 1,600 zeros, up to height 2,090, each within 0.0001 of its true place, and the right number of them, 5,598, up to height 6,000. 3. Without its correction the machine loses zeros only in pairs, and a rule worked out on the first stretch named every pair lost on the second before the machine ran there. Each of the thirteen lost pairs did not vanish but stepped off the critical line as a mirror pair; putting the correction back brings it home. 4. The zeros the wheels lose are the ones through which the dial bank of The Two-Needle Compass hears the primes most loudly. Crowding does not explain it; the low hill between two close zeros does, because that is where the small primes line up. 5. A tinkerer's overhaul rescues a coarser gearbox. Our first guess at Turing's gears, one pair of wheels to each wheel with at most 120 teeth, loses 1,078 zeros; re-set at each doorway, where the machine already stops, it loses 28. A string machine, one carriage per prime that may stop only at the gears continued fractions must find (read through Ford circles), loses none, and still loses none when cut as trains of small brass wheels with at most 60 teeth. Every prediction was written down before its run: of 60 scored, 49 landed and 11 missed, each miss followed by a redesign check or explained by a result already scored, and all 12 redesign statements landed; two more fell between the odds and stay undecided. The record holds the paper; a toy page that opens in any web browser, where you can turn the machine yourself, take away its correction, or swap in Turing's own gears; and a zip of every script, prediction file (as written before its run), output and data file, with a full rerun in a fresh copy that reproduced all 54 output files exactly. A preprint, not peer reviewed, with a limited literature search; built with Claude (Anthropic) as research partner for algorithm and program development. It claims nothing about the Riemann hypothesis. Matthew \"Bear\" Schulz, Belmont, CA · ORCID 0009-0000-0956-5743 · mattschulz97@protonmail.com · CC BY 4.0. Updated 14 November 2026: the PDF and the code-and-data zip were replaced in place to add three readings of card 10's outputs to Section 8 (the pair rule applied to Turing's gears, where their lost pair ranks among the closest pairs, and the comparison stretch by stretch), with the scripts that print them. The toy page is unchanged.",
+ "encoding": {
+  "@type": "MediaObject",
+  "contentUrl": "https://matthewschulz.net/papers/turing-zeta-rotor-model/turing-zeta-rotor-model.pdf",
+  "encodingFormat": "application/pdf"
+ }
+}
+</script>
+</head><body><div class="wrap">
+<header class="site"><a class="name" href="../../">Matthew “Bear” Schulz</a>
+<nav><a href="../../papers/">Papers</a><a href="https://orcid.org/0009-0000-0956-5743">ORCID</a></nav></header>
+<main>
+<h1>The Turing Zeta Rotor Model: Building Turing&#x27;s 1939 zeta-function machine from his notes, and listening to it with a dial machine</h1>
+<p class="byline">Matthew “Bear” Schulz · <a href="https://orcid.org/0009-0000-0956-5743">ORCID 0009-0000-0956-5743</a></p>
+<p class="meta">First published 14 November 2026</p>
+<p class="meta">DOI <a href="https://doi.org/10.5281/zenodo.24233198">10.5281/zenodo.24233198</a> · licence <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+<p><span class="status">Preprint · not peer reviewed</span></p>
+<div class="actions"><a class="primary" href="turing-zeta-rotor-model.pdf">Read the paper (PDF, 1.31 MB)</a><a href="https://doi.org/10.5281/zenodo.24233198">Record on Zenodo</a></div>
+
+<h2>Abstract</h2>
+<div class="abstract"><p>In 1939 Alan Turing set out to build a machine of gears, weights and cords that would find the zeros of the Riemann zeta function, on the idea of Lord Kelvin's tide-predicting machine. The war came and it was never finished. This paper builds it as a toy in software from the published accounts of his plan, turns it, and then improves it as a tinkerer might have, keeping the restoration and the overhaul apart.</p>
+<p>What it found:</p>
+<p>1. Turing's own gearbox works on his range. Read from the blueprint's gear table, as transcribed by the Museum of Mathematics and Wolfram, and turned over the heights Turing proposed, his gears find 5,596 of the 5,598 zeros below height 6,000, losing only one pair whose zeros sit a ninth of the average spacing apart; re-set at each doorway, they find every one and move the zeros between three and ten times less than our best overhaul, the string machine. The pair they lose is the one pair, of all 5,597, that the rule we found for the bare wheels picks out. Four of his gears, wheel for wheel, are ones our machines had already chosen by rule before we read his table.</p>
+<p>2. The machine works. Its turning wheels and one small correction find every one of the first 1,600 zeros, up to height 2,090, each within 0.0001 of its true place, and the right number of them, 5,598, up to height 6,000.</p>
+<p>3. Without its correction the machine loses zeros only in pairs, and a rule worked out on the first stretch named every pair lost on the second before the machine ran there. Each of the thirteen lost pairs did not vanish but stepped off the critical line as a mirror pair; putting the correction back brings it home.</p>
+<p>4. The zeros the wheels lose are the ones through which the dial bank of The Two-Needle Compass hears the primes most loudly. Crowding does not explain it; the low hill between two close zeros does, because that is where the small primes line up.</p>
+<p>5. A tinkerer's overhaul rescues a coarser gearbox. Our first guess at Turing's gears, one pair of wheels to each wheel with at most 120 teeth, loses 1,078 zeros; re-set at each doorway, where the machine already stops, it loses 28. A string machine, one carriage per prime that may stop only at the gears continued fractions must find (read through Ford circles), loses none, and still loses none when cut as trains of small brass wheels with at most 60 teeth.</p>
+<p>Every prediction was written down before its run: of 60 scored, 49 landed and 11 missed, each miss followed by a redesign check or explained by a result already scored, and all 12 redesign statements landed; two more fell between the odds and stay undecided.</p>
+<p>The record holds the paper; a toy page that opens in any web browser, where you can turn the machine yourself, take away its correction, or swap in Turing's own gears; and a zip of every script, prediction file (as written before its run), output and data file, with a full rerun in a fresh copy that reproduced all 54 output files exactly.</p>
+<p>A preprint, not peer reviewed, with a limited literature search; built with Claude (Anthropic) as research partner for algorithm and program development. It claims nothing about the Riemann hypothesis. Matthew "Bear" Schulz, Belmont, CA · ORCID 0009-0000-0956-5743 · mattschulz97@protonmail.com · CC BY 4.0.</p>
+<p>Updated 14 November 2026: the PDF and the code-and-data zip were replaced in place to add three readings of card 10's outputs to Section 8 (the pair rule applied to Turing's gears, where their lost pair ranks among the closest pairs, and the comparison stretch by stretch), with the scripts that print them. The toy page is unchanged.</p></div>
+<h2>Keywords</h2>
+<p class="keywords">Alan Turing · Riemann zeta function · zeta-function machine · Riemann-Siegel formula · Hardy Z function · tide-predicting machine · Lord Kelvin · history of computing · gear trains · continued fractions · Ford circles · Stern-Brocot tree · Lehmer pairs · preregistered predictions · reproducible research · toy model</p>
+<h2>How to cite</h2>
+<p class="cite">Schulz, M. (2026). The Turing Zeta Rotor Model: Building Turing&#x27;s 1939 zeta-function machine from his notes, and listening to it with a dial machine. Preprint, Zenodo. https://doi.org/10.5281/zenodo.24233198</p>
+<h2>Related papers</h2><ul class="list"><li><a href="../two-needle-compass/">The Two-Needle Compass: Why a Learning Mind Needs a Second Needle, and Now and Then a Look at the Sky</a><span class="d">13 November 2026</span></li><li><a href="../integer-forest-loop-walk/">Taking a Loop Walk Through the Integer Forest - A Coordinate-Free Holonomy Instrument for Multiplicative Structure</a><span class="d">20 July 2026</span></li></ul>
+</main>
+<footer>Preprints from an independent, part-time research team, free to the world under CC BY 4.0.
+None of this work has been peer reviewed, and each paper's literature search is limited; each paper says so and lists its own limits.
+Corrections are shown on the page of the paper they correct.</footer>
+</div></body></html>
